@@ -4,5 +4,8 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  distDir: 'build'
+  distDir: 'build',
+  images: {
+    domains: ['cdn.pixabay.com'],
+  },
 }

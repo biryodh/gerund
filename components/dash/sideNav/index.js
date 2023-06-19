@@ -10,7 +10,7 @@ export default function sideNav(e) {
       <nav className={"sidebar sidebar-offcanvas " + (e.settings.mobile?"active":"") } id="sidebar" >
         <div className="user-profile">
           <div className="user-image">
-            <Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Profile Pic"  />
+            <Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Profile Pic"  width={50} height={50} />
           </div>
           <div className="user-name">
               Balwinder Singh
@@ -35,28 +35,36 @@ export default function sideNav(e) {
             </div>
           </li> */}
           <li className="nav-item">
-            <a className="nav-link" href="/dashboard">
-              <i className="icon-file menu-icon"></i>
-              <span className="menu-title">Dashboard</span>
-            </a>
+            <Link href="/dashboard">
+              <div  className="nav-link">
+                <i className="icon-file menu-icon"></i>
+                <span className="menu-title">Dashboard</span>
+              </div>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/profile">
-              <i className="icon-pie-graph menu-icon"></i>
-              <span className="menu-title">Profile</span>
-            </a>
+            <Link href="/profile">
+              <div  className="nav-link">
+                <i className="icon-pie-graph menu-icon"></i>
+                <span className="menu-title">Profile</span>
+              </div>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/messages">
-              <i className="icon-pie-graph menu-icon"></i>
-              <span className="menu-title">Messages</span>
-            </a>
+            <Link  href="/messages">
+              <div  className="nav-link">
+                <i className="icon-pie-graph menu-icon"></i>
+                <span className="menu-title">Messages</span>
+              </div>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/settings">
+            <Link  href="/settings">
+              <div  className="nav-link">
               <i className="icon-pie-graph menu-icon"></i>
               <span className="menu-title">Settings</span>
-            </a>
+              </div>
+            </Link>
           </li>
          
          

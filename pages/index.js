@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Head>
         <title>_ :0</title>
-        <a rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
      
       </Head>
       <div>
