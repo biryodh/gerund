@@ -35,28 +35,28 @@ export default function sideNav(e) {
             </div>
           </li> */}
           <li className="nav-item">
-            <Link className="nav-link" href="/dashboard">
+            <a className="nav-link" href="/dashboard">
               <i className="icon-file menu-icon"></i>
               <span className="menu-title">Dashboard</span>
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/profile">
+            <a className="nav-link" href="/profile">
               <i className="icon-pie-graph menu-icon"></i>
               <span className="menu-title">Profile</span>
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/messages">
+            <a className="nav-link" href="/messages">
               <i className="icon-pie-graph menu-icon"></i>
               <span className="menu-title">Messages</span>
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/settings">
+            <a className="nav-link" href="/settings">
               <i className="icon-pie-graph menu-icon"></i>
               <span className="menu-title">Settings</span>
-            </Link>
+            </a>
           </li>
          
          

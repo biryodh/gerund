@@ -11,13 +11,13 @@ export default function Home() {
     <>
       <Head>
         <title>_ :0</title>
-        <link rel="icon" href="/favicon.ico" />
+        <a rel="icon" href="/favicon.ico" />
      
       </Head>
       <div>
         <Header title="tess" />
-          <Link href={'/signin'} >Signin</Link>
-          <Link href={'/about'} >About</Link>
+          <a href={'/signin'} >Signin</a>
+          <a href={'/about'} >About</a>
       </div>
     </>
   )
