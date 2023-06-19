@@ -28,11 +28,11 @@ export default function Dashboard(props) {
 
 export async function getServerSideProps (context){
 
-  // return {
-  //   props: {
-  //     baseApiUrl:"testurl",
-  //     profile:"myurl",
-  //   },
-  // };
+  return {
+    props: {
+      baseApiUrl:"testurl",
+      profile:"myurl",
+    },
+  };
 
 }
