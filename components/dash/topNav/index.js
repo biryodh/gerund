@@ -14,8 +14,8 @@ export default function SidebarComponent(e) {
     <>
       <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a className="navbar-brand brand-logo" href="#"><Image src="" alt="logo"/></a>
-        <a className="navbar-brand brand-logo-mini" href="#"><Image src="" alt="logo"/></a>
+        <a className="navbar-brand brand-logo" href="#"><Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png"  width={50} height={50} alt="logo"/></a>
+        <a className="navbar-brand brand-logo-mini" href="#"><Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Profile Pic"  width={50} height={50} /></a>
       </div>
       <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick ={()=> e.handleClick()}>
