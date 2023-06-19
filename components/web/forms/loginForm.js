@@ -64,7 +64,7 @@ export default function Login() {
                         </button>
                     </div>
                         <div className="text-center mt-4 font-weight-light">
-                            Don't have an account? <a href="register-2.html" className="text-primary">Create</a>
+                            Dont have an account? <a href="register-2.html" className="text-primary">Create</a>
                         </div>
                 </form>
             </div>
