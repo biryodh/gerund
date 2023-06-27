@@ -101,6 +101,8 @@ export default  connectDB(validation( { body: schemas.SigninSchema },   function
                 userPassword = user.password,
                 userCreated = user.createdAt;
                 
+                console.log(user)
+                //console.log()
               /* Check and compare password */
               bcrypt.compare(password, userPassword).then(isMatch => {
                 /* User matched */
@@ -112,21 +114,24 @@ export default  connectDB(validation( { body: schemas.SigninSchema },   function
                     email: userEmail,
                     createdAt: userCreated,
                   };
+
+                  res.status(200).json(payload);
+                  
                   /* Sign token */
-                  jwt.sign(
-                    payload,
-                    KEY,
-                    {
-                      expiresIn: 31556926, // 1 year in seconds
-                    },
-                    (err, token) => {
-                      /* Send succes with token */
-                      res.status(200).json({
-                        success: true,
-                        token: 'Bearer ' + token,
-                      });
-                    },
-                  );
+                  // jwt.sign(
+                  //   payload,
+                  //   KEY,
+                  //   {
+                  //     expiresIn: 31556926, // 1 year in seconds
+                  //   },
+                  //   (err, token) => {
+                  //     //Send succes with token 
+                  //     res.status(200).json({
+                  //       success: true,
+                  //       token: 'Bearer ' + token,
+                  //     });
+                  //   },
+                  // );
                 } else {
                   /* Send error with message */
                   res

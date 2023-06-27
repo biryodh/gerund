@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Script from "next/script";
 import { useEffect, useState, useRef } from 'react';
+import CreatePostModal from '../modals/create.post';
 
 
 
@@ -8,7 +9,11 @@ export default function SidebarComponent(e) {
 
   const [showNotification, toggelNotification] = useState(false);
   const [showSetting, toggelSettings] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
+  const handleModal = ()=>{
+    setIsOpenModal(!isOpenModal);
+  }
 
   return (
     <>
@@ -35,7 +40,11 @@ export default function SidebarComponent(e) {
         </ul>
         <ul className="navbar-nav navbar-nav-right">
             <li className="nav-item dropdown d-lg-flex d-none">
-                <button type="button" className="btn btn-info font-weight-bold">+ Create New</button>
+                <button type="button" className="btn btn-info font-weight-bold" onClick={handleModal}>
+                  + Create New
+                  <CreatePostModal handleModal={handleModal} stateModal={isOpenModal} />  
+                  <div id='AppElement'></div>
+                </button>
             </li>
           <li className="nav-item dropdown d-flex">
             <a className={"nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" + (showNotification?"show":"")} onClick={()=>{ toggelNotification(!showNotification) }} id="messageDropdown" href="#" data-toggle="dropdown">
@@ -45,7 +54,7 @@ export default function SidebarComponent(e) {
               <p className="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
               <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
-                    <Image src="" alt="image" className="profile-pic" />
+                    <Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="image"  width={50} height={50} className="profile-pic" />
                 </div>
                 <div className="preview-item-content flex-grow">
                   <h6 className="preview-subject ellipsis font-weight-normal">David Grey
@@ -57,7 +66,7 @@ export default function SidebarComponent(e) {
               </a>
               <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
-                    <Image src="" alt="image" className="profile-pic" />
+                    <Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="image"  width={50} height={50} className="profile-pic" />
                 </div>
                 <div className="preview-item-content flex-grow">
                   <h6 className="preview-subject ellipsis font-weight-normal">Tim Cook
@@ -69,7 +78,7 @@ export default function SidebarComponent(e) {
               </a>
               <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
-                    <Image src="" alt="image" className="profile-pic" />
+                    <Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="image"  width={50} height={50} className="profile-pic" />
                 </div>
                 <div className="preview-item-content flex-grow">
                   <h6 className="preview-subject ellipsis font-weight-normal"> Johnson

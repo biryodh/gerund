@@ -11643,7 +11643,7 @@ input[type="button"].btn-block {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   z-index: 1000;
   display: none;
   float: left;
@@ -21727,6 +21727,7 @@ dl li {
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+  margin-left: auto;
 }
 
 @media (max-width: 991px) {
@@ -21753,6 +21754,7 @@ dl li {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 60px);
+  position: fixed;
   background: #24242e;
   font-family: "Karla", sans-serif;
   font-weight: normal;

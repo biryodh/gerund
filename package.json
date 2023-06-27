@@ -17,9 +17,11 @@
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.2",
     "next": "^12.0.7",
+    "next-auth": "^4.22.1",
     "next-joi": "^2.2.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-modal": "^3.16.1"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.2.5",

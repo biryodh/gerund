@@ -5,12 +5,23 @@ import Posts from "@components/dash/modules/posts";
 import Link from 'next/link';
 import { useState, useEffect } from "react";
 
+export async function getServerSideProps (context){
+
+  return {
+    props: {
+      baseApiUrl:"testurl",
+      profile:"myurl",
+    },
+  };
+
+}
 
 export default function Layout(props) {
 //   const { profile , baseApiUrl} = props;
 
   const [openMenu, doOpen]= useState(false);
   const [openMenuInPhone, doOpenInPhone] = useState(false);
+  
   /* functions   */
   const handleClick = () => {
     doOpen(!openMenu);
@@ -25,6 +36,7 @@ export default function Layout(props) {
     document.body.classList.toggle('sidebar-icon-only', openMenu);
   },[openMenu])
 
+  
   return (
     <>
       <div className="container-scroller">
@@ -40,15 +52,4 @@ export default function Layout(props) {
       </div>
     </>
   )
-}
-
-export async function getServerSideProps (context){
-
-  return {
-    props: {
-      baseApiUrl:"testurl",
-      profile:"myurl",
-    },
-  };
-
 }

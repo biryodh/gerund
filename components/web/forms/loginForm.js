@@ -1,6 +1,8 @@
 import logo from "@styles/images/logo-dark.svg"
 //import bkImage from "@styles/images/auth/login-bg.jpg"
 import Image from 'next/image'
+import {signIn} from "next-auth/react"
+import { useState } from "react"
 //import "@styles/css/style.css"
 
 const styling = {
@@ -9,6 +11,16 @@ const styling = {
   
 
 export default function Login() {
+    const[email, setEmail]= useState("");
+    const[password, setPassword]= useState("");
+
+    const handleClick = ()=>{
+         signIn( "credentials",{
+            email:email,
+            password:password
+        })
+    }
+
     return (
       <>
         <div className="col-lg-6 d-flex align-items-center justify-content-center">
@@ -20,25 +32,25 @@ export default function Login() {
                 <h6 className="font-weight-light">Happy to see you again!</h6>
                 <form className="pt-3">
                     <div className="form-group">
-                        <label for="exampleInputEmail">Username</label>
+                        <label htmlFor="exampleInputEmail">Username</label>
                             <div className="input-group">
                                 <div className="input-group-prepend bg-transparent">
                                 <span className="input-group-text bg-transparent border-right-0">
                                     <i className="mdi mdi-account-outline text-primary"></i>
                                 </span>
                                 </div>
-                                <input type="text" className="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username" />
+                                <input type="text" className="form-control form-control-lg border-left-0" id="email" name="email" placeholder="Username" onBlur={(e)=>{ setEmail(e.target.value)}} />
                             </div>
                     </div>
                     <div className="form-group">
-                    <label for="exampleInputPassword">Password</label>
+                    <label htmlFor="exampleInputPassword">Password</label>
                     <div className="input-group">
                         <div className="input-group-prepend bg-transparent">
                             <span className="input-group-text bg-transparent border-right-0">
                                 <i className="mdi mdi-lock-outline text-primary"></i>
                             </span>
                         </div>
-                        <input type="password" className="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" />
+                        <input type="password" className="form-control form-control-lg border-left-0" id="password" name="password"  onBlur={(e)=>{ setPassword(e.target.value)}} placeholder="Password" />
                     </div>
                     </div>
                         <div className="my-2 d-flex justify-content-between align-items-center">
@@ -51,14 +63,18 @@ export default function Login() {
                         <a href="#" className="auth-link text-black">Forgot password?</a>
                         </div>
                         <div className="my-3">
-                            <a className="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" href="../../index.html">LOGIN</a>
+                            <button type="button" className="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" onClick={handleClick }>LOGIN</button>
                         </div>
                     <div className="mb-2 d-flex">
-                        <button type="button" className="btn btn-facebook auth-form-btn flex-grow mr-1">
+                        <button type="button" className="btn btn-facebook auth-form-btn flex-grow mr-1"
+                        onClick={() => signIn("facebook")}
+                        >
                             <i className="mdi mdi-facebook mr-2"></i>
                             Facebook
                         </button>
-                        <button type="button" className="btn btn-google auth-form-btn flex-grow ml-1">
+                        <button type="button" className="btn btn-google auth-form-btn flex-grow ml-1"
+                         onClick={() => signIn("google")}
+                         >
                             <i className="mdi mdi-google mr-2"></i>
                             Google
                         </button>

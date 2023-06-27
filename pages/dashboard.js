@@ -12,7 +12,9 @@ export default function Dashboard(props) {
         <>
                         <CreatePost />
                         <Posts />
-                   
+                        <Posts />
+                        <Posts />
+                      
         </>
       )
     }

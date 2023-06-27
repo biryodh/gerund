@@ -10,7 +10,7 @@ export default function sideNav(e) {
       <nav className={"sidebar sidebar-offcanvas " + (e.settings.mobile?"active":"") } id="sidebar" >
         <div className="user-profile">
           <div className="user-image">
-            <Image src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Profile Pic"  width={50} height={50} />
+            <Image src={"https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png"} alt="Profile Pic"  width={50} height={50} />
           </div>
           <div className="user-name">
               Balwinder Singh
