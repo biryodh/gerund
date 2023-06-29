@@ -20,7 +20,7 @@ const customStyles = {
     }
  }
 
-Modal.setAppElement('#AppElement');
+//Modal.setAppElement('#AppElement');
 
 export default  function CreatePostModal(props)  {
     //const [isOpen, setIsOpen] = useState(fas);

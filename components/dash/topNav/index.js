@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Script from "next/script";
 import { useEffect, useState, useRef } from 'react';
 import CreatePostModal from '../modals/create.post';
+import { signOut } from 'next-auth/react';
 
 
 
@@ -48,7 +49,7 @@ export default function SidebarComponent(e) {
             </li>
           <li className="nav-item dropdown d-flex">
             <a className={"nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" + (showNotification?"show":"")} onClick={()=>{ toggelNotification(!showNotification) }} id="messageDropdown" href="#" data-toggle="dropdown">
-              <i className="icon-air-play mx-0"></i>
+              <i className="icon-bell mx-0"></i>
             </a>
             <div className={"dropdown-menu dropdown-menu-right navbar-dropdown preview-list "  + (showNotification?"show":"")} aria-labelledby="messageDropdown">
               <p className="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
@@ -92,14 +93,17 @@ export default function SidebarComponent(e) {
           </li>
           <li className={"nav-item dropdown d-flex mr-4 " + (showNotification?"show":"")} onClick={()=>{ toggelSettings(!showSetting) }}>
             <a className="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i className="icon-cog"></i>
+              <i className="icon-briefcase"></i>
             </a>
             <div className={"dropdown-menu dropdown-menu-right navbar-dropdown preview-list " + (showSetting?"show":"")} aria-labelledby="notificationDropdown">
-              <p className="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-              <a className="dropdown-item preview-item">               
+              {/* <p className="mb-0 font-weight-normal float-left dropdown-header">Settings</p> */}
+              <a className="dropdown-item preview-item" href='/profile'>               
                   <i className="icon-head"></i> Profile
               </a>
-              <a className="dropdown-item preview-item">
+              <a className="dropdown-item preview-item" href='/settings'>               
+                  <i className="icon-cog"></i> Settings
+              </a>
+              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: '/signin' })}>
                   <i className="icon-inbox"></i> Logout
               </a>
             </div>

@@ -99,9 +99,11 @@ export default  connectDB(validation( { body: schemas.SigninSchema },   function
               const userId = user._id,
                 userEmail = user.email,
                 userPassword = user.password,
+                role=user.role,
+                name=user.fname,
                 userCreated = user.createdAt;
                 
-                console.log(user)
+               // console.log(user)
                 //console.log()
               /* Check and compare password */
               bcrypt.compare(password, userPassword).then(isMatch => {
@@ -112,6 +114,8 @@ export default  connectDB(validation( { body: schemas.SigninSchema },   function
                   const payload = {
                     id: userId,
                     email: userEmail,
+                    name:name,
+                    role:role,
                     createdAt: userCreated,
                   };
 

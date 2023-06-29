@@ -3,6 +3,7 @@ import logo from "@styles/images/logo-dark.svg"
 import Image from 'next/image'
 import {signIn} from "next-auth/react"
 import { useState } from "react"
+import {useRouter} from "next/router"
 //import "@styles/css/style.css"
 
 const styling = {
@@ -10,14 +11,23 @@ const styling = {
 }
   
 
-export default function Login() {
+export default function Login(props) {
     const[email, setEmail]= useState("");
     const[password, setPassword]= useState("");
+    const router = useRouter();
 
     const handleClick = ()=>{
          signIn( "credentials",{
             email:email,
-            password:password
+            password:password,
+            redirect: false,
+        },
+        ).then(({ ok, error })=>{
+            if (ok) {
+                router.push("/profile");
+            } else {
+                console.log("Credentials do not match!", { type: "error" });
+            }
         })
     }
 
@@ -32,18 +42,18 @@ export default function Login() {
                 <h6 className="font-weight-light">Happy to see you again!</h6>
                 <form className="pt-3">
                     <div className="form-group">
-                        <label htmlFor="exampleInputEmail">Username</label>
+                        {/* <label htmlFor="exampleInputEmail">Username</label> */}
                             <div className="input-group">
                                 <div className="input-group-prepend bg-transparent">
                                 <span className="input-group-text bg-transparent border-right-0">
                                     <i className="mdi mdi-account-outline text-primary"></i>
                                 </span>
                                 </div>
-                                <input type="text" className="form-control form-control-lg border-left-0" id="email" name="email" placeholder="Username" onBlur={(e)=>{ setEmail(e.target.value)}} />
+                                <input type="email" className="form-control form-control-lg border-left-0" id="email" name="email" placeholder="Email" onBlur={(e)=>{ setEmail(e.target.value)}} />
                             </div>
                     </div>
                     <div className="form-group">
-                    <label htmlFor="exampleInputPassword">Password</label>
+                    {/* <label htmlFor="exampleInputPassword">Password</label> */}
                     <div className="input-group">
                         <div className="input-group-prepend bg-transparent">
                             <span className="input-group-text bg-transparent border-right-0">
@@ -80,7 +90,7 @@ export default function Login() {
                         </button>
                     </div>
                         <div className="text-center mt-4 font-weight-light">
-                            Dont have an account? <a href="register-2.html" className="text-primary">Create</a>
+                            Dont have an account? <button type="button" className=" btn text-primary" onClick={()=>props.clickHandle()}>Create</button>
                         </div>
                 </form>
             </div>

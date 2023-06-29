@@ -1,25 +1,11 @@
-import TopNavrComponent from "@components/dash/topNav"
-import SideNavComponent from "@components/dash/sideNav"
-import CreatePost from "@components/dash/modules/createpost";
-import Posts from "@components/dash/modules/posts";
 import Link from 'next/link';
 import { useState, useEffect } from "react";
 import Layout from "@components/dash/layout";
-import { useSession, getSession } from "next-auth/react";
 
 
-export default function Profile(props) {
-  const { profile , baseApiUrl} = props;
- 
-  const { data: session, status } = useSession()
+export default function Messages(props) {
 
-  // console.log(status);
-  // console.log(session);
-  useEffect( () => {
-   
-  },[]);
-
-   const ProfileComponent = ()=>{
+   const MessagesComponent = ()=>{
     return(
         <>
             <div className="row">
@@ -32,15 +18,15 @@ export default function Profile(props) {
                   </p> */}
                   <form className="forms-sample">
                     <div className="form-group">
-                      <label htmlFor="exampleInputName1">First Name</label>
+                      <label for="exampleInputName1">First Name</label>
                       <input type="text" className="form-control" id="exampleInputName1" placeholder="Name" />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputName1">Last Name</label>
+                      <label for="exampleInputName1">Last Name</label>
                       <input type="text" className="form-control" id="exampleInputName1" placeholder="Name" />
                     </div>
                     {/* <div className="form-group">
-                      <label htmlFor="exampleInputEmail3">Email address</label>
+                      <label for="exampleInputEmail3">Email address</label>
                       <input type="email" className="form-control" id="exampleInputEmail3" placeholder="Email" />
                     </div>
                     <div className="form-group">
@@ -48,7 +34,7 @@ export default function Profile(props) {
                       <input type="password" className="form-control" id="exampleInputPassword4" placeholder="Password" />
                     </div> */}
                     <div className="form-group">
-                      <label htmlFor="exampleSelectGender">Gender</label>
+                      <label for="exampleSelectGender">Gender</label>
                         <select className="form-control" id="exampleSelectGender">
                           <option>Male</option>
                           <option>Female</option>
@@ -65,11 +51,11 @@ export default function Profile(props) {
                       </div>
                     </div> */}
                     <div className="form-group">
-                      <label htmlFor="exampleInputCity1">City</label>
+                      <label for="exampleInputCity1">City</label>
                       <input type="text" className="form-control" id="exampleInputCity1" placeholder="Location"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleTextarea1">About yourself</label>
+                      <label for="exampleTextarea1">About yourself</label>
                       <textarea className="form-control" id="exampleTextarea1" rows="4"></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary mr-2">Submit</button>
@@ -85,18 +71,7 @@ export default function Profile(props) {
 
   return (
     <>
-      <Layout childComponent={<ProfileComponent />} />
+      <Layout childComponent={<MessagesComponent />} />
     </>
   )
-}
-
-export async function getServerSideProps (context){
-
-  return {
-    props: {
-      baseApiUrl:"testurl",
-      profile:"myurl",
-    },
-  };
-
 }

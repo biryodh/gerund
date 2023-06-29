@@ -1,13 +1,12 @@
 import logo from "@styles/images/logo-dark.svg"
 //import bkImage from "@styles/images/auth/login-bg.jpg"
 import Image from 'next/image'
-//import "@styles/css/style.css"
-
+import { roles } from "lib/constants"
 const styling = {
     background: "url('/login-bg.jpg')"
 }
   
-export default function Register() {
+export default function Register(props) {
     return (
       <>
        <div className="col-lg-6 d-flex align-items-center justify-content-center">
@@ -19,18 +18,29 @@ export default function Register() {
               <h6 className="font-weight-light">Join us today! It takes only few steps</h6>
               <form className="pt-3">
                 <div className="form-group">
-                  <label>Username</label>
+                  {/* <label>Username</label> */}
                   <div className="input-group">
                     <div className="input-group-prepend bg-transparent">
                       <span className="input-group-text bg-transparent border-right-0">
                         <i className="mdi mdi-account-outline text-primary"></i>
                       </span>
                     </div>
-                    <input type="text" className="form-control form-control-lg border-left-0" placeholder="Username" />
+                    <input type="text" className="form-control form-control-lg border-left-0" placeholder="First Name" />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label>Email</label>
+                  {/* <label>Username</label> */}
+                  <div className="input-group">
+                    <div className="input-group-prepend bg-transparent">
+                      <span className="input-group-text bg-transparent border-right-0">
+                        <i className="mdi mdi-account-outline text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="text" className="form-control form-control-lg border-left-0" placeholder="Last Name" />
+                  </div>
+                </div>
+                <div className="form-group">
+                  {/* <label>Email</label> */}
                   <div className="input-group">
                     <div className="input-group-prepend bg-transparent">
                       <span className="input-group-text bg-transparent border-right-0">
@@ -40,19 +50,17 @@ export default function Register() {
                     <input type="email" className="form-control form-control-lg border-left-0" placeholder="Email" />
                   </div>
                 </div>
-                <div className="form-group">
-                  <label>Country</label>
-                  <select className="form-control form-control-lg" id="exampleFormControlSelect2">
-                    <option>Country</option>
-                    <option>United States of America</option>
-                    <option>United Kingdom</option>
-                    <option>India</option>
-                    <option>Germany</option>
-                    <option>Argentina</option>
+                {/* <div className="form-group">
+                  <label>Role</label>
+                  <select name="role" className="form-control form-control-lg" id="exampleFormControlSelect2">
+                  <option>Select role</option>
+                  {roles.map(function(role, i){
+                      return <option key={i} value={role.key}> {role.text} </option> ;
+                  })}
                   </select>
-                </div>
+                </div> */}
                 <div className="form-group">
-                  <label>Password</label>
+                  {/* <label>Password</label> */}
                   <div className="input-group">
                     <div className="input-group-prepend bg-transparent">
                       <span className="input-group-text bg-transparent border-right-0">
@@ -74,7 +82,7 @@ export default function Register() {
                   <a className="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
                 </div>
                 <div className="text-center mt-4 font-weight-light">
-                  Already have an account? <a href="login.html" className="text-primary">Login</a>
+                  Already have an account? <button type="button" className=" btn text-primary" onClick={()=>props.clickHandle()} >Login</button>
                 </div>
               </form>
             </div>
