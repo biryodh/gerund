@@ -115,4 +115,5 @@ export default function Profile(props) {
   )
 }
 
+Profile.auth = true;
 

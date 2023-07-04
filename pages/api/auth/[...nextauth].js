@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { getServerSession } from "next-auth"
 //import Providers from "next-auth/providers"
 //import GithubProvider from "next-auth/providers/github"
 import FacebookProvider from "next-auth/providers/facebook";
@@ -109,8 +109,7 @@ export const nextAuthOptions = {
       return token;
     },
     session: ({ session, token, user }) => {
-      console.log(" session token")
-      console.log(token)
+
       if (token) {
         session.user.email = token.email;
         session.user.name = token.fname;
@@ -123,3 +122,9 @@ export const nextAuthOptions = {
 }
 
 export default NextAuth(nextAuthOptions);
+
+
+export const getSessionAuth = (req, res)=>{
+  const session = getServerSession(req, res, nextAuthOptions);
+  return session;
+}
