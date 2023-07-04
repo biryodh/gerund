@@ -83,7 +83,9 @@ export default function Login(props) {
                             Facebook
                         </button>
                         <button type="button" className="btn btn-google auth-form-btn flex-grow ml-1"
-                         onClick={() => signIn("google")}
+                         onClick={() => signIn("google",{
+                            redirect: '/profile'
+                        })}
                          >
                             <i className="mdi mdi-google mr-2"></i>
                             Google

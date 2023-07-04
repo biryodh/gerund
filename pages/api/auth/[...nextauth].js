@@ -4,6 +4,8 @@ import NextAuth from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials"
+import { isUserExist, createUser } from "models/userModel";
+import {connectMongo} from "lib/middlewares/mongodb";
 
 
 export const nextAuthOptions = {
@@ -73,11 +75,26 @@ export const nextAuthOptions = {
   ],
   callbacks: {
     signIn : async ({ user, account, profile, email, credentials })=> {
+      return true;
+      const isUser = await isUserExist({email:user.email});
+      if(isUser){
+        return true;
+      }else{
+        let data = {
+          fname:user.name,
+          lname:null,
+          email:user.email,
+          password:  null,
+          verification_token:null,
+          picture:user.picture
+        };
+
+        const user = await createUser(data);
       
-      return true
+        return !!user;
+      }
     },
     redirect:async ({ url, baseUrl }) =>{
-      
       return baseUrl
     },
     jwt: async ({token,user}) => {
