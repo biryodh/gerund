@@ -3,6 +3,7 @@ import { decryption } from '@services/crypto';
 import { verifyUserbyToken } from '@models/userModel';
 
 
+
 export async function getServerSideProps({ query }) {
   let status = null;
   const obj = await decryption(query.s);

@@ -94,7 +94,7 @@ export default  connectDB(function func (req, res) {
             
             break;
         case 'PUT':
-            //console.log("put");
+            console.log("updating");
             break;
         case 'PATCH':
             break;

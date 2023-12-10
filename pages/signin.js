@@ -3,6 +3,7 @@ import Header from '@components/dash/Header'
 import Footer from '@components/dash/Footer'
 import Login from '@components/web/Login'
 import { getSessionAuth } from './api/auth/[...nextauth]'
+import { ToastContainer } from 'react-toastify';
 
 export async function getServerSideProps(ctx){
   const session = await getSessionAuth(ctx.req, ctx.res);
@@ -34,6 +35,7 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Login />
+        <ToastContainer />
     </div>
   )
 }

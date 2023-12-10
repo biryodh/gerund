@@ -4,8 +4,10 @@ import NextAuth, { getServerSession } from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials"
-import { isUserExist, createUser } from "models/userModel";
+import { isUserExist, createUser, getUserByEmail } from "models/userModel";
 import {connectMongo} from "lib/middlewares/mongodb";
+import { passwordVerify } from "@helperFunctions/password";
+import bcrypt from 'bcryptjs';
 
 
 export const nextAuthOptions = {
@@ -52,22 +54,32 @@ export const nextAuthOptions = {
               email:credentials.email,
               password:credentials.password
             }
+            let payLoad = {};
+          
+              /* Using API */
               //return false;
-            const res = await fetch("http://localhost:3000/api/login", {
-              method: 'POST',
-              body: JSON.stringify(payload),
-              headers: { "Content-Type": "application/json" }
-            })
+              // const res = await fetch(process.env.WEB_URL + "/api/login", {
+              //   method: 'POST',
+              //   body: JSON.stringify(payload),
+              //   headers: { "Content-Type": "application/json" }
+              // })
 
-            const user = await res.json()
-      
-            //console.log(res);
-            // If no error and we have user data, return it
-            if (res.ok && user) {
-              return user
+            /* Using Moogoose */
+            await connectMongo();
+
+            const user = await getUserByEmail(payload.email);
+            
+            if (!!user && await passwordVerify(credentials.password ,user.password)) {
+              return {
+                email:user.email,
+                name:user.fname,
+                role:user.role,
+                isactive:user.isactive,
+                id:user._id,
+                picture:user.picture                
+              };
             }
-            // Return null if user data could not be retrieved
-            return null
+            return null;
           },
         
       }),
@@ -75,46 +87,54 @@ export const nextAuthOptions = {
   ],
   callbacks: {
     signIn : async ({ user, account, profile, email, credentials })=> {
-      return true;
-      const isUser = await isUserExist({email:user.email});
-      if(isUser){
-        return true;
-      }else{
-        let data = {
-          fname:user.name,
-          lname:null,
-          email:user.email,
-          password:  null,
-          verification_token:null,
-          picture:user.picture
-        };
+     
+      if(account.provider == 'google'){
+          let data = {
+            fname: profile.given_name,
+            lname: profile.family_name,
+            email: profile.email,
+            password: "",
+            socialid:user.id,
+            socialsite:account.provider,
+            picture:user.image,
+            verification_token:null,
+            isactive:profile.email_verified
+          }
 
-        const user = await createUser(data);
-      
-        return !!user;
+          await connectMongo();
+          const isUser = await isUserExist({email:user.email});
+          if(isUser){
+            return true;
+          }else{
+            const user = await createUser(data);
+            return !!user;
+          }
+      }else{
+        return true;
       }
     },
     redirect:async ({ url, baseUrl }) =>{
       return baseUrl
     },
     jwt: async ({token,user}) => {
-     
+      
       if (user) {
         token.email = user.email;
         token.username = user.name;
         token.role = user.role;
+        token.picture = user.picture;
         token.accessToken = user.id;
       }
-
       return token;
     },
     session: ({ session, token, user }) => {
-
+      
       if (token) {
         session.user.email = token.email;
-        session.user.name = token.fname;
-        session.user.role = token.role;
+        session.user.name = token.name;
+        session.user.role = token.role?token.role:null;
         session.user.accessToken = token.accessToken;
+        session.user.picture = token.picture
       }
       return session;
     },

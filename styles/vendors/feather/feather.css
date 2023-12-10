@@ -54,6 +54,9 @@
 .icon-mail:before {
   content: "\e002";
 }
+.icon-edit::before{
+  content: "\f044";
+}
 
 .icon-mail:before {
   content: "\e002";

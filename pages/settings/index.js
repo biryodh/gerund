@@ -1,95 +1,97 @@
-import TopNavrComponent from "@components/dash/topNav"
-import SideNavComponent from "@components/dash/sideNav"
-import CreatePost from "@components/dash/modules/createpost";
-import Posts from "@components/dash/modules/posts";
-import Link from 'next/link';
 import { useState, useEffect } from "react";
 import Layout from "@components/dash/layout";
+import Head from "next/head";
+import EditEmail from "@components/dash/settings/edit.email.modal";
+import EditPassword from "@components/dash/settings/edit.password.modal";
+import EditLang from "@components/dash/settings/edit.lang.modal";
+import EditPhone from "@components/dash/settings/edit.phone.modal";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default function Settings(props) {
   const { profile , baseApiUrl} = props;
+  const [doEditEmail, toggleEditEmail] = useState(false);
+  const [doEditPhone, toggleEditPhone] = useState(false);
+  const [doEditPassword, toggleEditPasswordl] = useState(false);
+  const [doEditLang, toggleEditLang] = useState(false);
+
+  const handleModalEmail = ()=>{
+    toggleEditEmail(!doEditEmail);
+  }
+  const handleModalPhone = ()=>{
+    toggleEditPhone(!doEditPhone);
+  }
+  const handleModalPassword = ()=>{
+    toggleEditPasswordl(!doEditPassword);
+  }
+  const handleModalLang = ()=>{
+    toggleEditLang(!doEditLang);
+  }
 
    const SettingsComponent = ()=>{
     return(
         <>
+            <Head>
+              <title>Profile</title>
+            </Head>
+
             <div className="row">
-            <div className=" col-xl-9 d-flex  grid-margin stretch-card">
+           
+            <div className="col-lg-8 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <h4 className="card-title">Change email</h4>
+                  <h4 >Settings</h4>
                   {/* <p className="card-description">
-                    Basic form elements
+                    Add className <code>.table</code>
                   </p> */}
-                  <form className="forms-sample">
-                    
-                    <div className="form-group">
-                      <label for="exampleInputEmail3">New email address</label>
-                      <input type="email" className="form-control" id="exampleInputEmail3" placeholder="Email" />
-                    </div>
-                   
-                    <button type="submit" className="btn btn-primary mr-2">Update</button>
-                    <button className="btn btn-light">Cancel</button>
-                  </form>
+                  <div className="table-responsive">
+                    <table className="table">
+                      {/* <thead>
+                        <tr>
+                          <th></th>
+                          <th>details</th>
+                          <th>Updated on</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead> */}
+                      <tbody>
+                        <tr>
+                          <td>Email</td>
+                          <td>abc@yopmail</td>
+                          <td>Oct 12 2012</td>
+                          <td> <FontAwesomeIcon icon={faEdit} onClick={handleModalEmail}  /></td>
+                        </tr>
+                        <tr>
+                          <td>Phone</td>
+                          <td>8987773783</td>
+                          <td>Oct 12 2012</td>
+                          <td> <FontAwesomeIcon icon={faEdit}  onClick={handleModalPhone} /></td>
+                        </tr>
+                        <tr>
+                          <td>Change Password</td>
+                          <td>********</td>
+                          <td>Oct 12 2012</td>
+                          <td> <FontAwesomeIcon icon={faEdit}  onClick={handleModalPassword} /></td>
+                        </tr>
+                        <tr>
+                          <td>Language</td>
+                          <td>English</td>
+                          <td>Oct 12 2012</td>
+                          <td> <FontAwesomeIcon icon={faEdit} onClick={handleModalLang} /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div className=" col-xl-9 d-flex  grid-margin stretch-card">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Change password</h4>
-                  {/* <p className="card-description">
-                    Basic form elements
-                  </p> */}
-                  <form className="forms-sample">
-                    
-                  <div className="form-group">
-                      <label for="exampleInputPassword4">New Password</label>
-                      <input type="password" className="form-control" id="exampleInputPassword4" placeholder="Password" />
-                    </div>
-                    <div className="form-group">
-                      <label for="exampleInputPassword4">Confirm Password</label>
-                      <input type="password" className="form-control" id="exampleInputPassword4" placeholder="Password" />
-                    </div>
-                    
-                    <button type="submit" className="btn btn-primary mr-2">Update</button>
-                    <button className="btn btn-light">Cancel</button>
-                  </form>
-                </div>
-              </div>
-              
+            <EditEmail   user={{email:'abc@gmail.com'}} handleModal={handleModalEmail} stateModal={doEditEmail} />
+            <EditPassword  user={{password:'abc@gmail.com'}} handleModal={handleModalPassword} stateModal={doEditPassword}  />
+            <EditPhone  user={{phone:'abc@gmail.com'}} handleModal={handleModalPhone} stateModal={doEditPhone}  />
+            <EditLang  user={{language:'abc@gmail.com'}} handleModal={handleModalLang} stateModal={doEditLang}  />
             </div>
 
-            <div className=" col-xl-9 d-flex  grid-margin stretch-card">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Change Language</h4>
-                  {/* <p className="card-description">
-                    Basic form elements
-                  </p> */}
-                  <form className="forms-sample">
-                    
-                      <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Country</label>
-                          <div className="col-sm-9">
-                            <select className="form-control">
-                              <option>America</option>
-                              <option>Italy</option>
-                              <option>Russia</option>
-                              <option>Britain</option>
-                            </select>
-                          </div>
-                      </div>
-                   
-                    <button type="submit" className="btn btn-primary mr-2">Update</button>
-                    <button className="btn btn-light">Cancel</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            </div>
         </>
     )
   }

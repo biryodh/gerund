@@ -33,13 +33,30 @@ export default function WorkerSideMenu(){
             </Link>
           </li> */}
           <li className="nav-item">
-            <Link  href="/messages">
+            <Link  href="/dashboard">
               <div  className="nav-link">
                 <i className="icon-pie-graph menu-icon"></i>
-                <span className="menu-title">Messages</span>
+                <span className="menu-title">Dashboard</span>
               </div>
             </Link>
           </li>
+          <li className="nav-item">
+            <Link  href="/vehicles">
+              <div  className="nav-link">
+                <i className="icon-pie-graph menu-icon"></i>
+                <span className="menu-title">Vehicles</span>
+              </div>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link  href="/alerts">
+              <div  className="nav-link">
+                <i className="icon-pie-graph menu-icon"></i>
+                <span className="menu-title">Alerts</span>
+              </div>
+            </Link>
+          </li>
+         
           {/* <li className="nav-item">
             <Link  href="/settings">
               <div  className="nav-link">

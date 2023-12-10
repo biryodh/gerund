@@ -1,19 +1,23 @@
-import TopNavrComponent from "@components/dash/topNav"
-import SideNavComponent from "@components/dash/sideNav"
-import CreatePost from "@components/dash/modules/createpost";
-import Posts from "@components/dash/modules/posts";
 import Link from 'next/link';
 import { useState, useEffect } from "react";
 import Layout from "@components/dash/layout";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { nextAuthOptions } from "../api/auth/[...nextauth]";
+import { getUserByID } from '@models/userModel';
+import Head from 'next/head';
 
+import { Formik, Form, Field, useFormik } from 'formik';
+import * as Yup from "yup";
+import reqInstance from "@services/api";
+import EditProfile from "@components/dash/profile/edit.profile.modal";
+
+/* start server side function */
 export async function getServerSideProps (context){
 
   const session = await getServerSession(context.req, context.res, nextAuthOptions);
 
-
+  //console.log(session.user.accessToken);
   if (!session) {
     return {
       redirect: {
@@ -23,87 +27,116 @@ export async function getServerSideProps (context){
     }
   }
 
+  const userDetails = await getUserByID(session.user.accessToken);
 
   return {
     props: {
       user:{
-        email:session.user.email,
-      },
+        email:userDetails.email,
+        fname:userDetails.fname,
+        lname:userDetails.lname,
+        gender:userDetails.gender,
+        city:userDetails.city,
+        about:userDetails.about
+      }
     },
   };
 
 }
 
+/* End server side function */
+
+const validateSchema = Yup.object().shape({
+  fname:  Yup.string().required("This field is required"),
+  lname:  Yup.string().required("This field is required"),
+  //email:  Yup.string().email("Please enter a valid email").required("This field is required"),
+  gender: Yup.string().required("This field is required"),
+  city:   Yup.string().required("This field is required"),
+  about:  Yup.string().required("This field is required"),
+});
 
 export default function Profile(props) {
-  const { email = null } = props.user;
-  
-  const { data: session, status } = useSession()
+
+  const { fname, lname, about, city, gender, email} = props.user;
+  //const { data: session, status } = useSession();
+  const [isOk, setOk]= useState(false);
+  const [doEdit, toggleEdit] = useState(false);
+  const [response, setResponse]= useState("");
 
   useEffect( () => {
    
   },[]);
 
+  const handleModal = ()=>{
+    toggleEdit(!doEdit);
+  }
+
    const ProfileComponent = ()=>{
     return(
         <>
+            <Head>
+              <title>Profile</title>
+            </Head>
             <div className="row">
-            <div className=" col-xl-9 d-flex  grid-margin stretch-card">
+            <div className="col-md-9 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <h4 className="card-title">Profile: {email}</h4>
+                  <div className='row'>
+                    <div className='col-10'> 
+                      <h4 >Profile</h4>
+                    </div> 
+                    <div className='col-2'> 
+                    <a  className="btn btn-success" style={{"float":"right"}} onClick={handleModal}>
+                      <i className='fa fa-edit' >Edit</i>
+                    </a>
+                    </div>
+                  </div>
                   {/* <p className="card-description">
-                    Basic form elements
+                      Horizontal form layout
                   </p> */}
-                  <form className="forms-sample">
-                    <div className="form-group">
-                      <label htmlFor="exampleInputName1">First Name</label>
-                      <input type="text" className="form-control" id="exampleInputName1" placeholder="Name" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="exampleInputName1">Last Name</label>
-                      <input type="text" className="form-control" id="exampleInputName1" placeholder="Name" />
-                    </div>
-                    {/* <div className="form-group">
-                      <label htmlFor="exampleInputEmail3">Email address</label>
-                      <input type="email" className="form-control" id="exampleInputEmail3" placeholder="Email" />
-                    </div>
-                    <div className="form-group">
-                      <label for="exampleInputPassword4">Password</label>
-                      <input type="password" className="form-control" id="exampleInputPassword4" placeholder="Password" />
-                    </div> */}
-                    <div className="form-group">
-                      <label htmlFor="exampleSelectGender">Gender</label>
-                        <select className="form-control" id="exampleSelectGender">
-                          <option>Male</option>
-                          <option>Female</option>
-                        </select>
+                
+                    <div className="row">
+                      <label htmlFor="exampleInputEmail2" className="col-sm-3 col-form-label">Email</label>
+                      <div className="col-sm-6">
+                        <label className=" col-form-label"  placeholder="Email" >{email} </label>
                       </div>
-                    {/* <div className="form-group">
-                      <label>File upload</label>
-                      <input type="file" name="img[]" className="file-upload-default" />
-                      <div className="input-group col-xs-12">
-                        <input type="text" className="form-control file-upload-info" disabled="" placeholder="Upload Image" />
-                        <span className="input-group-append">
-                          <button className="file-upload-browse btn btn-primary" type="button">Upload</button>
-                        </span>
+                    </div>
+                    <div className="row">
+                      <label htmlFor="exampleInputMobile" className="col-sm-3 col-form-label">Mobile</label>
+                      <div className="col-sm-6">
+                        <label className=" col-form-label"  id="exampleInputMobile" placeholder="Mobile number"> {fname} </label>
                       </div>
-                    </div> */}
-                    <div className="form-group">
-                      <label htmlFor="exampleInputCity1">City</label>
-                      <input type="text" className="form-control" id="exampleInputCity1" placeholder="Location"/>
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="exampleTextarea1">About yourself</label>
-                      <textarea className="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    <div className=" row">
+                      <label htmlFor="exampleInputPassword2" className="col-sm-3 col-form-label">First Name</label>
+                      <div className="col-sm-6">
+                      <label className=" col-form-label" id="exampleInputPassword2" placeholder="Password" >{fname} </label>
+                      </div>
                     </div>
-                    <button type="submit" className="btn btn-primary mr-2">Submit</button>
-                    <button className="btn btn-light">Cancel</button>
-                  </form>
+                    <div className=" row">
+                      <label htmlFor="exampleInputConfirmPassword2" className="col-sm-3 col-form-label">Last Name</label>
+                      <div className="col-sm-6">
+                        <label className=" col-form-label"  id="exampleInputConfirmPassword2" placeholder="Password" > {lname}</label>
+                      </div>
+                    </div>
+                    <div className=" row">
+                      <label htmlFor="exampleInputConfirmPassword2" className="col-sm-3 col-form-label">City</label>
+                      <div className="col-sm-6">
+                        <label className=" col-form-label"  id="exampleInputConfirmPassword2" placeholder="Password" > {city}</label>
+                      </div>
+                    </div>
+                    <div className=" row">
+                      <label htmlFor="exampleInputConfirmPassword2" className="col-sm-3 col-form-label">About</label>
+                      <div className="col-sm-9">
+                        <label className=" col-form-label"  id="exampleInputConfirmPassword2" placeholder="Password" > {about}</label>
+                      </div>
+                    </div>
+                  
                 </div>
               </div>
             </div>
             </div>
+            <EditProfile  user={props.user} handleModal={handleModal} stateModal={doEdit} />
         </>
     )
   }

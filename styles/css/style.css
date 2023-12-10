@@ -12816,7 +12816,7 @@ input[type="button"].btn-block {
 
 .navbar .container,
 .navbar .container-fluid, .navbar .container-sm, .navbar .container-md, .navbar .container-lg, .navbar .container-xl {
-  display: flex;
+  display: flex;  
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -12834,6 +12834,7 @@ input[type="button"].btn-block {
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
+  color: #001533;
 }
 
 .navbar-nav {
@@ -20078,8 +20079,11 @@ code {
   color: #001737;
   margin-bottom: .5rem;
   text-transform: capitalize;
-  font-size: 0.875rem;
+  /* font-size: 0.875rem; */
   font-weight: bold;
+  width: 50%;
+  float: left;
+  text-align: center;
 }
 
 .card .card-subtitle {
@@ -22826,3 +22830,23 @@ dl li {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

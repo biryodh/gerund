@@ -1,7 +1,7 @@
 import logo from "@styles/images/logo-dark.svg"
 //import bkImage from "@styles/images/auth/login-bg.jpg"
 import Image from 'next/image'
-import { roles } from "lib/constants"
+//import { roles } from "lib/constants"
 import { Formik, Form, Field, useFormik } from 'formik';
 import * as Yup from "yup";
 import reqInstance from "@services/api";
@@ -10,8 +10,6 @@ import { useState } from "react";
 const styling = {
     background: "url('/login-bg.jpg')"
 }
-
-
 
   
 export default function Register(props) {
@@ -38,7 +36,8 @@ export default function Register(props) {
 
 
   const doRegister= async(data)=>{
-    const url = "http://localhost:3000/api/register";
+    console.log(data);
+    const url = process.env.WEB_URL + "/api/register";
     const user  = await reqInstance.post(url,data).then((response) => {
       console.log(response.data);
       setResponse("You has been registered successfully");
@@ -72,7 +71,7 @@ export default function Register(props) {
                         validationSchema={validateSchema}
                         onSubmit= {(values) => {
                           doRegister(values);
-                        }} 
+                        }}
                       >
 
                   {({values, errors, touched, handleBlur, handleChange, onSubmit, handleSubmit }) => (

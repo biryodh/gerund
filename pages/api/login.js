@@ -101,16 +101,13 @@ export default  connectDB(validation( { body: schemas.SigninSchema },   function
                 userPassword = user.password,
                 role=user.role,
                 name=user.fname,
-                userCreated = user.createdAt;
-                
-               // console.log(user)
-                //console.log()
+                userCreated = user.since;
+             
               /* Check and compare password */
               bcrypt.compare(password, userPassword).then(isMatch => {
                 /* User matched */
                 if (isMatch) {
                   /* Create JWT Payload */
-                  //console.log("Hereeeee");
                   const payload = {
                     id: userId,
                     email: userEmail,
@@ -118,7 +115,7 @@ export default  connectDB(validation( { body: schemas.SigninSchema },   function
                     role:role,
                     createdAt: userCreated,
                   };
-
+                
                   res.status(200).json(payload);
                   
                   /* Sign token */

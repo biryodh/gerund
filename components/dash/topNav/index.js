@@ -3,6 +3,8 @@ import Script from "next/script";
 import { useEffect, useState, useRef } from 'react';
 import CreatePostModal from '../modals/create.post';
 import { signOut } from 'next-auth/react';
+import { ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 
 
@@ -11,6 +13,9 @@ export default function SidebarComponent(e) {
   const [showNotification, toggelNotification] = useState(false);
   const [showSetting, toggelSettings] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const router = useRouter();
+
+ 
 
   const handleModal = ()=>{
     setIsOpenModal(!isOpenModal);
@@ -27,7 +32,7 @@ export default function SidebarComponent(e) {
         <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick ={()=> e.handleClick()}>
           <span className="icon-menu"></span>
         </button>
-        <ul className="navbar-nav mr-lg-2">
+        {/* <ul className="navbar-nav mr-lg-2">
           <li className="nav-item nav-search d-none d-lg-block">
             <div className="input-group">
               <div className="input-group-prepend">
@@ -35,15 +40,14 @@ export default function SidebarComponent(e) {
                   <i className="icon-search"></i>
                 </span>
               </div>
-              <input type="text" className="form-control" placeholder="Search Projects.." aria-label="search" aria-describedby="search" />
+              <input type="text" className="form-control" placeholder="Search..." aria-label="search" aria-describedby="search" />
             </div>
           </li>
-        </ul>
+        </ul> */}
         <ul className="navbar-nav navbar-nav-right">
             <li className="nav-item dropdown d-lg-flex d-none">
                 <button type="button" className="btn btn-info font-weight-bold" onClick={handleModal}>
                   + Create New
-                  <CreatePostModal handleModal={handleModal} stateModal={isOpenModal} />  
                   <div id='AppElement'></div>
                 </button>
             </li>
@@ -103,7 +107,7 @@ export default function SidebarComponent(e) {
               <a className="dropdown-item preview-item" href='/settings'>               
                   <i className="icon-cog"></i> Settings
               </a>
-              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: '/signin' })}>
+              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: process.env.WEB_URL + '/signin' })}>
                   <i className="icon-inbox"></i> Logout
               </a>
             </div>
@@ -119,8 +123,9 @@ export default function SidebarComponent(e) {
           <span className="icon-menu"></span>
         </button>
       </div>
-    </nav>
-
+      </nav>
+      <CreatePostModal handleModal={handleModal} stateModal={isOpenModal} />  
+      <ToastContainer />
         {/* <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" onError={() => setHasError(true)} onReady={() => setIsReady(true)} /> */}
       {/* <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"  /> */}
       {/* <Script src="js/hoverable-collapse.js"  />

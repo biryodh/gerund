@@ -4,6 +4,8 @@ import Image from 'next/image'
 import {signIn} from "next-auth/react"
 import { useState } from "react"
 import {useRouter} from "next/router"
+import { toast } from 'react-toastify';
+
 //import "@styles/css/style.css"
 
 const styling = {
@@ -26,7 +28,7 @@ export default function Login(props) {
             if (ok) {
                 router.push("/profile");
             } else {
-                console.log("Credentials do not match!", { type: "error" });
+                toast.error("Credentials do not match!");
             }
         })
     }
@@ -75,17 +77,16 @@ export default function Login(props) {
                         <div className="my-3">
                             <button type="button" className="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" onClick={handleClick }>LOGIN</button>
                         </div>
-                    <div className="mb-2 d-flex">
-                        <button type="button" className="btn btn-facebook auth-form-btn flex-grow mr-1"
+                        <hr></hr>
+                    <div className=" d-flex">
+                        {/* <button type="button" className="btn btn-facebook auth-form-btn flex-grow mr-1"
                         onClick={() => signIn("facebook")}
                         >
                             <i className="mdi mdi-facebook mr-2"></i>
                             Facebook
-                        </button>
-                        <button type="button" className="btn btn-google auth-form-btn flex-grow ml-1"
-                         onClick={() => signIn("google",{
-                            redirect: '/profile'
-                        })}
+                        </button> */}
+                        <button type="button" className="btn btn-google auth-form-btn flex-grow "
+                         onClick={() => signIn("google",{ callbackUrl: process.env.WEB_URL + '/dashboard' })}
                          >
                             <i className="mdi mdi-google mr-2"></i>
                             Google
