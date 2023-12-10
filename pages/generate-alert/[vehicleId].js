@@ -33,7 +33,7 @@ export async function getServerSideProps({ query }) {
     console.log("vObj:",vObj);
     if(vObj!=null){
         isFind = true;
-        uObj = await getUserByID (vObj.user_id);
+        uObj = await getUserByID(vObj.user_id);
     }
     
   
@@ -41,7 +41,7 @@ export async function getServerSideProps({ query }) {
       props: {
         isFind:isFind,
         vehicleId:vid,
-        vehiclenumber:vObj!=null?vObj.number:null,
+        vehiclenumber:vObj!=null?vObj.vnumber:null,
         userEmail: uObj!=null?obscureEmail(uObj.email):null
       } 
     };
@@ -59,10 +59,11 @@ export default function GenerateAlertForm(props) {
         const url = "http://localhost:3000/api/generate-alert";
         const user  = await reqInstance.post(url,data).then((response) => {
           setResponse("You has been registered successfully");
-          setOk(true);
+          router.push('/generate-alert');
+          //setOk(true);
         }).catch((error)=>{
           setResponse("Oops! something went wrong, Please try again");
-          setOk(true);
+          //setOk(true);
         });
     }
 

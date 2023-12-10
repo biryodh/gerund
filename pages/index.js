@@ -56,13 +56,13 @@ export default function Home(props) {
             <nav id="navbar" className="navbar">
               <ul>
                 <li><Link href={'/dashboard'}>Dashboard</Link></li>
-                <li><a className="nav-link scrollto" href="#about">{t('ABOUT')}</a></li>
-                <li><a className="nav-link scrollto" href="#services">{i18n.language}</a></li>
-                <li><a className="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+                {/* <li><a className="nav-link scrollto" href="#about">{t('ABOUT')}</a></li> */}
+                {/* <li><a className="nav-link scrollto" href="#services">{i18n.language}</a></li> */}
+                {/* <li><a className="nav-link scrollto " href="#portfolio">Portfolio</a></li> */}
                 <li><a className="nav-link scrollto" href="#team">Team</a></li>
-                <li><a className="nav-link scrollto" href="#pricing">Pricing</a></li>
+                <li><a className="nav-link scrollto" href="/generate-alert">Generate Alert</a></li>
                 <li><Link href={'/signin'}><a className="nav-link scrollto" href="#">Sign In</a></Link></li>
-                <li className="dropdown"><a href="#"><span>Drop Down</span> <i className="bi bi-chevron-down"></i></a>
+                {/* <li className="dropdown"><a href="#"><span>Drop Down</span> <i className="bi bi-chevron-down"></i></a>
                   <ul>
                     <li><a  href="#">Drop Down 1</a></li>
                     <li className="dropdown"><a href="#"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
@@ -78,8 +78,8 @@ export default function Home(props) {
                     <li><a href="#">Drop Down 3</a></li>
                     <li><a href="#">Drop Down 4</a></li>
                   </ul>
-                </li>
-                <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
+                </li> */}
+                {/* <li><a className="nav-link scrollto" href="#contact">Contact</a></li> */}
               </ul>
               <i className="bi bi-list mobile-nav-toggle"></i>
             </nav>
