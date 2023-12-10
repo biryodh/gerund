@@ -83,9 +83,9 @@ export const getVehicleByNumber = async (number)=>{
   return vehicle;
 }
 //username
-export const getVehicles =async (username)=>{
+export const getVehicles =async (user_id)=>{
   await connectMongo();
-  const vehicle = await Vehicle.find({ }).
+  const vehicle = await Vehicle.find({user_id:user_id }).
   catch(err => {console.log('Caught:', err.message)
   return null;
 });

@@ -6,6 +6,7 @@ import reqInstance from "@services/api";
 import * as Yup from "yup";
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { WEBURL } from 'lib/constants';
 
 const customStyles = {
     overlay: {
@@ -55,7 +56,7 @@ export default  function CreatePostModal(props)  {
 
    const addVehicle= async(data)=>{
     console.log(data);
-    const url = "http://localhost:3000/api/add-vehicle";
+    const url = WEBURL+"/api/add-vehicle";
     const user  = await reqInstance.post(url,data).then((response) => {
       setResponse("You has been registered successfully");
       //setOk(true);

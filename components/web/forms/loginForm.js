@@ -5,7 +5,7 @@ import {signIn} from "next-auth/react"
 import { useState } from "react"
 import {useRouter} from "next/router"
 import { toast } from 'react-toastify';
-
+import { WEBURL } from "lib/constants"
 //import "@styles/css/style.css"
 
 const styling = {
@@ -87,7 +87,7 @@ export default function Login(props) {
                         </button> */}
                      
                         <button type="button" className="btn btn-google auth-form-btn flex-grow "
-                         onClick={() => signIn("google",{ callbackUrl: 'http://localhost:3000/dashboard' })}
+                         onClick={() => signIn("google",{ callbackUrl: WEBURL+'/dashboard' })}
                          >
                             <i className="mdi mdi-google mr-2"></i>
                             Google

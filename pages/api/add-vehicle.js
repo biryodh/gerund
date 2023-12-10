@@ -11,9 +11,15 @@ import { AlertTemplate } from "@components/email-templates/alert-template";
 import { render } from '@react-email/render';
 //import { getServerSession } from 'next-auth';
 import { getSession } from 'next-auth/react';
+import { getToken } from 'next-auth/jwt';
+import { getUserByEmail } from 'models/userModel';
 
-export default  connectDB(function func (req, res) {
-  
+export default  connectDB(async function func (req, res) {
+
+      const user = await getToken({req});
+      const user_id = await getUserByEmail(user.email);
+      //console.log(user_id._id.toString())
+
     return new Promise(async(resolve) => {
       
       const session = await getSession();
@@ -37,7 +43,7 @@ export default  connectDB(function func (req, res) {
                 cno:cno,
                 fuel:fuel,
                 color:color,
-                user_id:session?.user.id
+                user_id:user_id._id
             }
 
             var recordAdded = await createVehicleRecord(data);

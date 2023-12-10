@@ -9,6 +9,7 @@ import { Formik, Form, Field,  useFormik } from 'formik';
 import * as Yup from "yup";
 import Modal from 'react-modal';
 import reqInstance from "@services/api";
+import { WEBURL } from "lib/constants";
 //import { redirect } from 'next/navigation';
 
 const styling = {
@@ -26,7 +27,7 @@ export default function GenerateAlertForm() {
     const router = useRouter();
 
     const searchVehicle= async(data)=>{
-        const url = "http://localhost:3000/api/vehicle-search";
+        const url = WEBURL+"/api/vehicle-search";
         const user  = await reqInstance.post(url,data).then((response) => {
           setResponse("You has been registered successfully");
           router.push("/generate-alert/"+response.data.data._id);

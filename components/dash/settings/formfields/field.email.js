@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field, useFormik } from 'formik';
 import * as Yup from "yup";
+import { WEBURL } from 'lib/constants';
 
 
 const emailValidateSchema = Yup.object().shape({
@@ -12,7 +13,7 @@ const EmailField = (props)=>{
 
     const emailupdateRequest= async(data)=>{
         //console.log(data);
-        const url = "http://localhost:3000/api/user/edit";
+        const url = WEBURL+"/api/user/edit";
         props.handleStep1(false);
         props.handleStep2(true);
         props.handleNewEmail(data.email);

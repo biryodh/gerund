@@ -10,7 +10,7 @@ import { getUserByID } from '@models/userModel';
 import reqInstance from "@services/api";
 import Modal from 'react-modal';
 import {obscureEmail}  from "@helperFunctions/functions"
-
+import { WEBURL } from 'lib/constants';
 //import "@styles/css/style.css"
 
 const styling = {
@@ -56,9 +56,10 @@ export default function GenerateAlertForm(props) {
 
     const sendAlert= async(data)=>{
         console.log(data);
-        const url = "http://localhost:3000/api/generate-alert";
+        const url = WEBURL+"/api/generate-alert";
         const user  = await reqInstance.post(url,data).then((response) => {
           setResponse("You has been registered successfully");
+          alert("Alert has been sent successfully");
           router.push('/generate-alert');
           //setOk(true);
         }).catch((error)=>{

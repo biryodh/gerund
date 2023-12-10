@@ -5,12 +5,16 @@ import {getVehicles} from "@models/vehicleModel";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faBell } from '@fortawesome/free-solid-svg-icons';
 import {QRCodeSVG} from 'qrcode.react';
+import { getSessionAuth } from '../../pages/api/auth/[...nextauth]'
+import { getUserByEmail } from 'models/userModel';
+import { WEBURL } from 'lib/constants';
 
-const AlertUrl = "http://localhost:3000/generate-alert/";
+const AlertUrl = WEBURL+"/generate-alert/";
 
-export async function getServerSideProps({ query }) {
-  const userId = "";
-  let response = await getVehicles(userId);
+export async function getServerSideProps(ctx ) {
+  const session = await getSessionAuth(ctx.req, ctx.res);
+  const user = await getUserByEmail(session.user.email);
+  let response = await getVehicles(user._id);
 
   let VehicleListArray =[];
 

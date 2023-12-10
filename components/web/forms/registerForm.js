@@ -6,7 +6,7 @@ import { Formik, Form, Field, useFormik } from 'formik';
 import * as Yup from "yup";
 import reqInstance from "@services/api";
 import { useState } from "react";
-
+import { WEBURL } from "lib/constants";
 const styling = {
     background: "url('/login-bg.jpg')"
 }
@@ -37,7 +37,7 @@ export default function Register(props) {
 
   const doRegister= async(data)=>{
     console.log(data);
-    const url = "http://localhost:3000/api/register";
+    const url = WEBURL+"/api/register";
     const user  = await reqInstance.post(url,data).then((response) => {
       console.log(response.data);
       setResponse("You has been registered successfully");

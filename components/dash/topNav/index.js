@@ -5,7 +5,7 @@ import CreatePostModal from '../modals/create.post';
 import { signOut } from 'next-auth/react';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
-
+import { WEBURL } from 'lib/constants';
 
 
 export default function SidebarComponent(e) {
@@ -107,7 +107,7 @@ export default function SidebarComponent(e) {
               <a className="dropdown-item preview-item" href='/settings'>               
                   <i className="icon-cog"></i> Settings
               </a>
-              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: 'http://localhost:3000/signin' })}>
+              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: WEBURL+'/signin' })}>
                   <i className="icon-inbox"></i> Logout
               </a>
             </div>
