@@ -107,7 +107,7 @@ export default function SidebarComponent(e) {
               <a className="dropdown-item preview-item" href='/settings'>               
                   <i className="icon-cog"></i> Settings
               </a>
-              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: process.env.WEB_URL + '/signin' })}>
+              <a className="dropdown-item preview-item" href='#' onClick={()=>signOut({ callbackUrl: 'http://localhost:3000/signin' })}>
                   <i className="icon-inbox"></i> Logout
               </a>
             </div>

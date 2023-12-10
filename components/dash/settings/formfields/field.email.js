@@ -12,7 +12,7 @@ const EmailField = (props)=>{
 
     const emailupdateRequest= async(data)=>{
         //console.log(data);
-        const url = process.env.WEB_URL + "/api/user/edit";
+        const url = "http://localhost:3000/api/user/edit";
         props.handleStep1(false);
         props.handleStep2(true);
         props.handleNewEmail(data.email);

@@ -26,7 +26,7 @@ export default function GenerateAlertForm() {
     const router = useRouter();
 
     const searchVehicle= async(data)=>{
-        const url = process.env.WEB_URL + "/api/vehicle-search";
+        const url = "http://localhost:3000/api/vehicle-search";
         const user  = await reqInstance.post(url,data).then((response) => {
           setResponse("You has been registered successfully");
           router.push("/generate-alert/"+response.data.data._id);

@@ -40,7 +40,7 @@ export default connectDB(validation( { body: schemas.LoginSchema },  async funct
           };
   
           var usercreated = await createUser(data);
-          //const vl= process.env.WEB_URL + '/verify-account?s='+encryptedData;
+          //const vl= 'http://localhost:3000/verify-account?s='+encryptedData;
           
           if(usercreated){
 

@@ -9,7 +9,7 @@ export function VerifyAccount(props) {
     <Html lang="en">
       <p>Verify Account</p>
       <Hr />
-      <Button href={process.env.WEB_URL + `/verify-account?s=${props.token}`}>Click me</Button>
+      <Button href={`http://localhost:3000/verify-account?s=${props.token}`}>Click me</Button>
     </Html>
   );
 }

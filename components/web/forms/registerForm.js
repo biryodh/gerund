@@ -37,7 +37,7 @@ export default function Register(props) {
 
   const doRegister= async(data)=>{
     console.log(data);
-    const url = process.env.WEB_URL + "/api/register";
+    const url = "http://localhost:3000/api/register";
     const user  = await reqInstance.post(url,data).then((response) => {
       console.log(response.data);
       setResponse("You has been registered successfully");

@@ -58,7 +58,7 @@ export const nextAuthOptions = {
           
               /* Using API */
               //return false;
-              // const res = await fetch(process.env.WEB_URL + "/api/login", {
+              // const res = await fetch("http://localhost:3000/api/login", {
               //   method: 'POST',
               //   body: JSON.stringify(payload),
               //   headers: { "Content-Type": "application/json" }

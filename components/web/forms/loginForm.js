@@ -85,8 +85,9 @@ export default function Login(props) {
                             <i className="mdi mdi-facebook mr-2"></i>
                             Facebook
                         </button> */}
+                     
                         <button type="button" className="btn btn-google auth-form-btn flex-grow "
-                         onClick={() => signIn("google",{ callbackUrl: process.env.WEB_URL + '/dashboard' })}
+                         onClick={() => signIn("google",{ callbackUrl: 'http://localhost:3000/dashboard' })}
                          >
                             <i className="mdi mdi-google mr-2"></i>
                             Google

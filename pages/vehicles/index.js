@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faBell } from '@fortawesome/free-solid-svg-icons';
 import {QRCodeSVG} from 'qrcode.react';
 
-const AlertUrl = process.env.WEB_URL + "/generate-alert/";
+const AlertUrl = "http://localhost:3000/generate-alert/";
 
 export async function getServerSideProps({ query }) {
   const userId = "";
