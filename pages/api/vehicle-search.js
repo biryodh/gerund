@@ -9,15 +9,9 @@ import { Mailer } from '@services/nodemailer';
 import { AlertTemplate } from "@components/email-templates/alert-template";
 import { render } from '@react-email/render';
 
-import { getToken } from 'next-auth/jwt';
-import { getUserByEmail } from 'models/userModel';
 
 export default  connectDB(async function func (req, res) {
   
-     const user = await getToken({req});
-     const user_id = await getUserByEmail(user.email);
-     console.log(user_id._id.toString())
-    return ;
 
     return new Promise(async(resolve) => {
     
